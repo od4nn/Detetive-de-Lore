@@ -41,6 +41,10 @@ typedef struct {
     Obra *obras;
     int quant_obras;
     int capacidade_obras;
-}DetetiveDB;
+}LoreDB;
+
+//funcoes
+
+void inicializar_db(LoreDB *db);
 
 #endif
