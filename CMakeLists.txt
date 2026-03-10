@@ -5,4 +5,5 @@ set(CMAKE_C_STANDARD 11)
 
 add_executable(Detetive_de_Lore
         detetive/main.c
-        detetive/info.h)
+        detetive/info.h
+        detetive/dados.c)

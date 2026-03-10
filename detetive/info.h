@@ -33,9 +33,14 @@ typedef struct {
     char status[TAMANHO_STATUS]; //andamento, concluido, cancelada...
     char genero[TAMANHO_GENERO]; //drama, acao, aventura...
     Teoria *teorias;
-    int quant_teoria;
+    int quant_teorias;
+    int capacidade_teorias;
 }Obra;
 
-
+typedef struct {
+    Obra *obras;
+    int quant_obras;
+    int capacidade_obras;
+}DetetiveDB;
 
 #endif
