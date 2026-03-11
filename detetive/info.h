@@ -43,8 +43,20 @@ typedef struct {
     int capacidade_obras;
 }LoreDB;
 
+
+/*===Enum para Erros===*/
+typedef enum {
+    OK = 0, //Sucesso geral
+
+    //ERROS:
+    ERR_FALTA_MEMORIA = 1, // Falha malloc/realloc
+    ERR_LEITURA = 2, //Falha ao salvar dados dos clientes
+    ERR_CLIENTE_NAO_ENCONTRADO = 3,
+}CodigosErro;
+
 //funcoes
 
 void inicializar_db(LoreDB *db);
-
+void adicionar_obra(LoreDB *db);
+void tratar_retorno (int codigo, char *msg_sucesso, char *msg_erro);
 #endif
