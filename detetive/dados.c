@@ -8,16 +8,23 @@ void inicializar_db (LoreDB *db) {
     db->capacidade_obras = 0;
 }
 
-void adicionar_obra(LoreDB *db) {
+int adicionar_obra(LoreDB *db) {
     Obra *temp = NULL;
 
     if (db->quant_obras == db->capacidade_obras) {
-        if (db->capacidade_obras == 0) {
-            temp = realloc(temp, sizeof(Obra));
-            if (temp == NULL) {
 
+        int nova_capacidade = (db->capacidade_obras == 0) ? 2 : (db->capacidade_obras * 2);
+            temp = realloc(db->obras, sizeof(Obra) * nova_capacidade);
+
+            if (temp == NULL) {
+                return ERR_FALTA_MEMORIA;
             }
-        }
+
+            db->obras = temp;
+            db->capacidade_obras = nova_capacidade;
     }
+
+    int i = db->quant_obras;
+
 }
 
