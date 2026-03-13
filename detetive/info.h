@@ -59,4 +59,5 @@ typedef enum {
 void inicializar_db(LoreDB *db);
 void adicionar_obra(LoreDB *db);
 void tratar_retorno (int codigo, char *msg_sucesso, char *msg_erro);
+void limpar_buffer();
 #endif
