@@ -17,10 +17,12 @@ void tratar_retorno (int codigo, char *msg_sucesso, char *msg_erro) {
             break;
         }
         case ERR_LEITURA: {
-            printf("Falha ao salvar dados de clientes.\n");
+            printf("Falha ao salvar dados.\n");
+            break;
         }
-        case ERR_CLIENTE_NAO_ENCONTRADO: {
-            printf("Falha ao encontrar id de cliente.");
+        case ERR_OBRA_NAO_ENCONTRAD: {
+            printf("Falha ao encontrar obra.");
+            break;
         }
         default: {
             printf("Erro desconhecido.");
@@ -30,4 +32,14 @@ void tratar_retorno (int codigo, char *msg_sucesso, char *msg_erro) {
 
 void limpar_buffer() {
     while (getchar() != '\n');
+}
+
+void menu() {
+    int resp = 0;
+    do {
+        printf("--- Menu ---\n");
+        printf("1. Adicionar Obra");
+        printf("0. Encerrar programa");
+        printf("\n\nEscolha uma opcao: ");
+    }while (resp != 0);
 }
