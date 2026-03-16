@@ -40,3 +40,12 @@ int adicionar_obra(LoreDB *db, Obra obra_usuario){
     return OK;
 }
 
+int listar_obras(LoreDB *db) {
+
+    if (db->quant_obras == 0) {
+        return ERR_OBRA_NAO_ENCONTRAD;
+    }
+
+
+}
+

@@ -61,4 +61,5 @@ int adicionar_obra(LoreDB *db, Obra obra_usuario);
 void tratar_retorno (int codigo, char *msg_sucesso, char *msg_erro);
 void limpar_buffer();
 void menu();
+int listar_obras(LoreDB *db);
 #endif
