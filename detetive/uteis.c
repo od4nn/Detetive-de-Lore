@@ -38,8 +38,8 @@ void menu() {
     int resp = 0;
     do {
         printf("--- Menu ---\n");
-        printf("1. Adicionar Obra");
-        printf("0. Encerrar programa");
-        printf("\n\nEscolha uma opcao: ");
+        printf("1. Adicionar Obra\n");
+        printf("0. Encerrar programa\n");
+        printf("\nEscolha uma opcao: ");
     }while (resp != 0);
 }
