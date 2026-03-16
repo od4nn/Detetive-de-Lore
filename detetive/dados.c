@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "info.h"
 
 void inicializar_db (LoreDB *db) {
@@ -8,7 +9,7 @@ void inicializar_db (LoreDB *db) {
     db->capacidade_obras = 0;
 }
 
-int adicionar_obra(LoreDB *db) {
+int adicionar_obra(LoreDB *db, Obra obra_usuario){
     Obra *temp = NULL;
 
     if (db->quant_obras == db->capacidade_obras) {
@@ -26,5 +27,16 @@ int adicionar_obra(LoreDB *db) {
 
     int i = db->quant_obras;
 
+
+    db->obras[i] = obra_usuario; //copiando dados do main para a struct
+
+    db->obras[i].teorias = NULL; //zerando teorias
+    //zerando capacidade e quant
+    db->obras[i].quant_teorias = 0;
+    db->obras[i].capacidade_teorias = 0;
+
+    db->quant_obras++; //incrementa uma obra
+
+    return OK;
 }
 
