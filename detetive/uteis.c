@@ -21,11 +21,11 @@ void tratar_retorno (int codigo, char *msg_sucesso, char *msg_erro) {
             break;
         }
         case ERR_OBRA_NAO_ENCONTRAD: {
-            printf("Falha ao encontrar obra.");
+            printf("Falha ao encontrar obra.\n");
             break;
         }
         default: {
-            printf("Erro desconhecido.");
+            printf("Erro desconhecido.\n");
         }
     }
 }
@@ -35,11 +35,9 @@ void limpar_buffer() {
 }
 
 void menu() {
-    int resp = 0;
-    do {
-        printf("--- Menu ---\n");
+        printf("\n--- Menu ---\n");
         printf("1. Adicionar Obra\n");
+        printf("2. Listar Obras\n");
         printf("0. Encerrar programa\n");
         printf("\nEscolha uma opcao: ");
-    }while (resp != 0);
 }
