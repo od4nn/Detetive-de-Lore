@@ -46,6 +46,18 @@ int listar_obras(LoreDB *db) {
         return ERR_OBRA_NAO_ENCONTRAD;
     }
 
+    for (int i = 0; i < db->quant_obras; i++) {
+        /* no futuro colocar apenas o nome de todas as obras, e entao assim que o
+         * usuario desejar qual ver, mostrar as outras informações como tipo e genero
+         * e ai todas as teorias dela, evita poluição. */
 
+        printf("\n--OBRA N.%d--", i+1);
+        printf("\nNome: %s", db->obras[i].obra_nome);
+        printf("\nTipo: %s", db->obras[i].tipo);
+        printf("\nStatus: %s", db->obras[i].status);
+        printf("\nGenero: %s", db->obras[i].genero);
+        printf("\nTeorias feitas: %d", db->obras[i].quant_teorias);
+    }
+    return OK;
 }
 

@@ -46,16 +46,24 @@ int main()
                 break;
             }
 
+            case 2: {
+                if(listar_obras(&database) == ERR_OBRA_NAO_ENCONTRAD) {
+                    printf("Erro: Crie uma obra primeiro!\n\n");
+                    break;
+                    //erro feedback
+                }
+                break;
+            }
+
             case 0: {
-                printf("\nEncerrando o programa...\n");
+                printf("Encerrando o programa...\n");
+                break;
             }
 
             default: {
                 printf("Erro: informe uma opcao valida! (1,2,3,0)\n");
             }
         }
-
-
 
     }while (opcao != 0);
 
