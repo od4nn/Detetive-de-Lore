@@ -18,9 +18,8 @@ int main()
         limpar_buffer();
 
         switch(opcao) {
-            case 1: {
+            case 1:{
                 Obra obra_temp; //var temporaria para preenchimento de dados
-
                 printf("---ADICIONAR OBRA---\n");
 
                 printf("\nInforme o nome da obra: ");
@@ -42,7 +41,6 @@ int main()
 
                 tratar_retorno(adicionar_obra(&database, obra_temp),
                     "Obra adicionada", "adicionar obra");
-
                 break;
             }
 
@@ -55,6 +53,9 @@ int main()
                 break;
             }
 
+            case 3: {
+
+            }
             case 0: {
                 printf("Encerrando o programa...\n");
                 break;

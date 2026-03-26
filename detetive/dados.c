@@ -61,3 +61,18 @@ int listar_obras(LoreDB *db) {
     return OK;
 }
 
+int buscar_obras(LoreDB *db, char *nome_obra) {
+
+    if (db->quant_obras == 0) {
+        return ERR_OBRA_PESQUISA_NAO_EXISTE;
+    }
+
+    for (int i = 0; i < db->quant_obras; i++) {
+        if(strcmp(nome_obra, db->obras[i].obra_nome) == 0) {
+            return i;
+        }
+    }
+    // se nao achou a obra ate aqui
+    return ERR_OBRA_PESQUISA_NAO_ENCONTRADA;
+}
+

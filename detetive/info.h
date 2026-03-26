@@ -49,6 +49,8 @@ typedef enum {
     OK = 0, //Sucesso geral
 
     //ERROS:
+    ERR_OBRA_PESQUISA_NAO_EXISTE = -2, //nao existe nada ainda
+    ERR_OBRA_PESQUISA_NAO_ENCONTRADA = -1, //para a funcao buscar obra. como mexemos com indice tem que ser negativo
     ERR_FALTA_MEMORIA = 1, // Falha malloc/realloc
     ERR_LEITURA = 2, //Falha ao salvar dados
     ERR_OBRA_NAO_ENCONTRAD = 3,
@@ -62,4 +64,5 @@ void tratar_retorno (int codigo, char *msg_sucesso, char *msg_erro);
 void limpar_buffer();
 void menu();
 int listar_obras(LoreDB *db);
+int buscar_obras(LoreDB *db, char *nome_obra);
 #endif
