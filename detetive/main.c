@@ -55,8 +55,6 @@ int main()
             case 3: {
                 char NOME_OBRA_TEMP[TAMANHO_NOME_OBRA];
                 Teoria NOVA_TEORIA;
-                int episodio_temp;
-                int temporada_temp;
 
                 printf("\nEm qual obra voce deseja adicionar a teoria? ");
                 fgets(NOME_OBRA_TEMP, TAMANHO_NOME_OBRA, stdin);
@@ -78,11 +76,11 @@ int main()
                 printf("\n--- Obra encontrada! Preencha as informacoes... ---\n");
 
                 printf("Informe o episodio (somente numeros): ");
-                scanf("%d", &episodio_temp);
+                scanf("%d", &NOVA_TEORIA.episodio);
                 limpar_buffer();
 
                 printf("Informe a temporada (somente numeros): ");
-                scanf("%d", &temporada_temp);
+                scanf("%d", &NOVA_TEORIA.temporada);
                 limpar_buffer();
 
                 printf("Guarde a sua teoria (limite de caracteres = 4000): ");

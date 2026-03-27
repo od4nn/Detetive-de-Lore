@@ -25,7 +25,7 @@ typedef struct {
     char teoria [TAMANHO_TEORIA];
     char status_teoria[TAMANHO_STATUS]; //comprovada, refutada, andamento...
     char data [TAMANHO_DATA]; // DD/MM/AAAA
-}Teoria;
+}Teoria; //filho
 
 typedef struct {
     char obra_nome[TAMANHO_NOME_OBRA];
@@ -35,13 +35,13 @@ typedef struct {
     Teoria *teorias;
     int quant_teorias;
     int capacidade_teorias;
-}Obra;
+}Obra; //pai
 
 typedef struct {
     Obra *obras;
     int quant_obras;
     int capacidade_obras;
-}LoreDB;
+}LoreDB; //avô
 
 
 /*===Enum para Erros===*/
@@ -64,4 +64,5 @@ void limpar_buffer();
 void menu();
 int listar_obras(LoreDB *db);
 int buscar_obras(LoreDB *db, char *nome_obra);
+int adicionar_teoria(LoreDB *db, int indice, Teoria nova_teoria);
 #endif

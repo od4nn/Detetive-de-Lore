@@ -27,7 +27,6 @@ int adicionar_obra(LoreDB *db, Obra obra_usuario){
 
     int i = db->quant_obras;
 
-
     db->obras[i] = obra_usuario; //copiando dados do main para a struct
 
     db->obras[i].teorias = NULL; //zerando teorias
@@ -74,5 +73,33 @@ int buscar_obras(LoreDB *db, char *nome_obra) {
     }
     // se nao achou a obra ate aqui
     return ERR_OBRA_PESQUISA_NAO_ENCONTRADA;
+}
+
+int adicionar_teoria(LoreDB *db, int indice, Teoria nova_teoria) {
+    Teoria *temp = NULL;
+
+    if (db->obras[indice].quant_teorias == db->obras[indice].capacidade_teorias) {
+
+        int nova_capacidade = (db->obras[indice].capacidade_teorias == 0) ? 2 :
+        (db->obras[indice].capacidade_teorias * 2);     /* se for zero (ainda nao existe
+        cria dois espaços se nao dobra o que ja existe) */
+
+        temp = realloc(db->obras[indice].teorias, sizeof(Teoria) * nova_capacidade);
+
+        if (temp == NULL) {
+            return ERR_FALTA_MEMORIA;
+        }
+
+        db->obras[indice].teorias = temp;
+        db->obras[indice].capacidade_teorias = nova_capacidade;
+    }
+
+    int i = db->obras[indice].quant_teorias;
+
+    db->obras[indice].teorias[i] = nova_teoria; //indice diz qual obra deve ser, i diz qual teoria é
+
+    db->obras[indice].quant_teorias++;
+
+    return OK;
 }
 
