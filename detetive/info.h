@@ -16,12 +16,12 @@ liberação total de memória (free). */
 #define TAMANHO_TIPO 40
 #define TAMANHO_STATUS 30
 #define TAMANHO_GENERO 40
-#define TAMANHO_NOME_EPISODIO 150
 #define TAMANHO_TEORIA 4000
 #define TAMANHO_DATA 13
 
 typedef struct {
-    char episodio[TAMANHO_NOME_EPISODIO];
+    int episodio;
+    int temporada;
     char teoria [TAMANHO_TEORIA];
     char status_teoria[TAMANHO_STATUS]; //comprovada, refutada, andamento...
     char data [TAMANHO_DATA]; // DD/MM/AAAA
@@ -57,7 +57,6 @@ typedef enum {
 }CodigosErro;
 
 //funcoes
-
 void inicializar_db(LoreDB *db);
 int adicionar_obra(LoreDB *db, Obra obra_usuario);
 void tratar_retorno (int codigo, char *msg_sucesso, char *msg_erro);
