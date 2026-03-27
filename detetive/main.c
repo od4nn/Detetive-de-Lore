@@ -18,7 +18,7 @@ int main()
         limpar_buffer();
 
         switch(opcao) {
-            case 1:{
+            case 1: {
                 Obra obra_temp; //var temporaria para preenchimento de dados
                 printf("---ADICIONAR OBRA---\n");
 
@@ -48,12 +48,54 @@ int main()
                 if(listar_obras(&database) == ERR_OBRA_NAO_ENCONTRAD) {
                     printf("Erro: Crie uma obra primeiro!\n\n");
                     break;
-                    //erro feedback
                 }
                 break;
             }
 
             case 3: {
+                char NOME_OBRA_TEMP[TAMANHO_NOME_OBRA];
+                Teoria NOVA_TEORIA;
+                int episodio_temp;
+                int temporada_temp;
+
+                printf("\nEm qual obra voce deseja adicionar a teoria? ");
+                fgets(NOME_OBRA_TEMP, TAMANHO_NOME_OBRA, stdin);
+                NOME_OBRA_TEMP[strcspn(NOME_OBRA_TEMP, "\n")] = '\0';
+
+                int indice = buscar_obras(&database, NOME_OBRA_TEMP); //busca obra
+
+                //verifica se foi atribuido o indice corretamente
+                if (indice == ERR_OBRA_PESQUISA_NAO_EXISTE) {
+                    printf("\nErro: Crie uma obra antes!\n");
+                    break;
+                }
+                if (indice == ERR_OBRA_PESQUISA_NAO_ENCONTRADA) {
+                    printf("\nErro: Obra nao encontrada!\nCertifique se de ter"
+                           "criado a obra ou se digitou o nome corretamente.\n");
+                    break;
+                }
+
+                printf("\n--- Obra encontrada! Preencha as informacoes... ---\n");
+
+                printf("Informe o episodio (somente numeros): ");
+                scanf("%d", &episodio_temp);
+                limpar_buffer();
+
+                printf("Informe a temporada (somente numeros): ");
+                scanf("%d", &temporada_temp);
+                limpar_buffer();
+
+                printf("Guarde a sua teoria (limite de caracteres = 4000): ");
+                fgets(NOVA_TEORIA.teoria, TAMANHO_TEORIA, stdin);
+                NOVA_TEORIA.teoria[strcspn(NOVA_TEORIA.teoria, "\n")] = '\0';
+
+                printf("Status da teoria (comprovada, refutada, andamento): ");
+                fgets(NOVA_TEORIA.status_teoria, TAMANHO_TEORIA, stdin);
+                NOVA_TEORIA.status_teoria[strcspn(NOVA_TEORIA.status_teoria, "\n")] = '\0';
+
+                printf("Data da teoria (formato = DD/MM/AAAA): ");
+                fgets(NOVA_TEORIA.data, TAMANHO_DATA, stdin);
+                NOVA_TEORIA.data[strcspn(NOVA_TEORIA.data, "\n")] = '\0';
 
             }
             case 0: {
