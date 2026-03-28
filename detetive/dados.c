@@ -103,39 +103,45 @@ int adicionar_teoria(LoreDB *db, int indice, Teoria nova_teoria) {
 void detalhar_obra(LoreDB *db, int indice) {
     char resposta;
 
-    printf("\nInformacoes da obra:\n");
+    printf("Informacoes da obra:\n");
     printf("\nTipo: %s", db->obras[indice].tipo);
     printf("\nStatus: %s", db->obras[indice].status);
     printf("\nGenero: %s", db->obras[indice].genero);
     printf("\nTeorias feitas: %d\n", db->obras[indice].quant_teorias);
 
-    printf("\nDigite 's' para sim | Digite 'n' para nao: ");
-    do {
-        printf("\nDeseja ver as teorias dessa obra? ");
-        scanf("%c", &resposta);
-        limpar_buffer();
+    if (db->obras[indice].quant_teorias > 0) {
+        printf("\nDigite 's' para sim | Digite 'n' para nao: ");
+        do {
+            printf("\nDeseja ver as teorias dessa obra? ");
+            scanf("%c", &resposta);
+            limpar_buffer();
 
-        resposta = tolower(resposta);
-    }while (resposta != 's' && resposta != 'n');
+            resposta = tolower(resposta);
+        }while (resposta != 's' && resposta != 'n');
 
-    if (resposta == 's') {
-        for (int i = 0; i < db->obras[indice].quant_teorias; i++) {
+        if (resposta == 's') {
             printf("\n---Teorias da obra %s ---\n", db->obras[indice].obra_nome);
+            for (int i = 0; i < db->obras[indice].quant_teorias; i++) {
 
-            printf("\nTeoria %d:", i+1);
-            printf("\n%s", db->obras[indice].teorias[i].teoria);
+                printf("\nTeoria %d:", i+1);
+                printf("\n""%s"" ", db->obras[indice].teorias[i].teoria);
 
-            printf("\nEpisodio: %d | Temporada: %d", db->obras[indice]
-            .teorias[i].episodio, db->obras[indice].teorias[i].temporada);
+                printf("\nEpisodio: %d | Temporada: %d", db->obras[indice]
+                .teorias[i].episodio, db->obras[indice].teorias[i].temporada);
 
-            printf("\nStatus da teoria: %s",
-                db->obras[indice].teorias[i].status_teoria);
+                printf("\nStatus da teoria: %s",
+                    db->obras[indice].teorias[i].status_teoria);
 
-            printf("\nData: %s\n",db->obras[indice].teorias[i].data);
+                printf("\nData: %s\n",db->obras[indice].teorias[i].data);
+            }
+        }
+
+        else if (resposta == 'n') {
+            printf("\nVoltando para o menu...\n");
         }
     }
 
-    else if (resposta == 'n') {
-        printf("\nVoltando para o menu...\n");
+    else {
+        printf("\nNenhuma teoria cadastrada nessa obra ainda.");
     }
 }

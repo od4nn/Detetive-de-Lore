@@ -49,8 +49,8 @@ int main()
                     printf("Erro: Crie uma obra primeiro!\n\n");
                     break;
                 }
-                printf("Caso queira saber as informacoes detalhadas dessa"
-                       " obra digite o 4 no menu e informe o nome da obra.")
+                printf("\nCaso queira saber as informacoes detalhadas dessa"
+                       " obra digite o 4 no menu e informe o nome da obra.\n");
                 break;
             }
 
@@ -72,7 +72,7 @@ int main()
                 if (indice == ERR_OBRA_PESQUISA_NAO_ENCONTRADA) {
                     printf("\nErro: Obra nao encontrada!\nCertifique se de ter "
                            "criado a obra ou se digitou o nome corretamente. Letras"
-                           "maisculas, minusculas e espacos importam!\n");
+                           " maisculas, minusculas e espacos importam!\n");
                     break;
                 }
 
@@ -106,7 +106,7 @@ int main()
 
             case 4: {
                 char NOME_OBRA_TEMP[TAMANHO_NOME_OBRA];
-                printf("Informe o nome da obra que deseja inspecionar: ");
+                printf("\nInforme o nome da obra que deseja inspecionar: ");
                 fgets(NOME_OBRA_TEMP, TAMANHO_NOME_OBRA, stdin);
                 NOME_OBRA_TEMP[strcspn(NOME_OBRA_TEMP, "\n")] = '\0';
 
@@ -126,6 +126,9 @@ int main()
 
                 printf("Obra %s encontrada!", database.obras[indice].obra_nome);
 
+                detalhar_obra(&database, indice);
+
+                break;
             }
             case 0: {
                 printf("Encerrando o programa...\n");
