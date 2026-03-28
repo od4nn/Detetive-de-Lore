@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "info.h"
+#include <ctype.h>
 
 void inicializar_db (LoreDB *db) {
     db->obras = NULL;
@@ -51,11 +52,7 @@ int listar_obras(LoreDB *db) {
          * e ai todas as teorias dela, evita poluição. */
 
         printf("\n--OBRA N.%d--", i+1);
-        printf("\nNome: %s", db->obras[i].obra_nome);
-        /*printf("\nTipo: %s", db->obras[i].tipo);
-        printf("\nStatus: %s", db->obras[i].status);
-        printf("\nGenero: %s", db->obras[i].genero);
-        printf("\nTeorias feitas: %d\n", db->obras[i].quant_teorias);*/
+        printf("\nNome: %s\n", db->obras[i].obra_nome);
     }
     return OK;
 }
@@ -103,3 +100,42 @@ int adicionar_teoria(LoreDB *db, int indice, Teoria nova_teoria) {
     return OK;
 }
 
+void detalhar_obra(LoreDB *db, int indice) {
+    char resposta;
+
+    printf("\nInformacoes da obra:\n");
+    printf("\nTipo: %s", db->obras[indice].tipo);
+    printf("\nStatus: %s", db->obras[indice].status);
+    printf("\nGenero: %s", db->obras[indice].genero);
+    printf("\nTeorias feitas: %d\n", db->obras[indice].quant_teorias);
+
+    printf("\nDigite 's' para sim | Digite 'n' para nao: ");
+    do {
+        printf("\nDeseja ver as teorias dessa obra? ");
+        scanf("%c", &resposta);
+        limpar_buffer();
+
+        resposta = tolower(resposta);
+    }while (resposta != 's' && resposta != 'n');
+
+    if (resposta == 's') {
+        for (int i = 0; i < db->obras[indice].quant_teorias; i++) {
+            printf("\n---Teorias da obra %s ---\n", db->obras[indice].obra_nome);
+
+            printf("\nTeoria %d:", i+1);
+            printf("\n%s", db->obras[indice].teorias[i].teoria);
+
+            printf("\nEpisodio: %d | Temporada: %d", db->obras[indice]
+            .teorias[i].episodio, db->obras[indice].teorias[i].temporada);
+
+            printf("\nStatus da teoria: %s",
+                db->obras[indice].teorias[i].status_teoria);
+
+            printf("\nData: %s\n",db->obras[indice].teorias[i].data);
+        }
+    }
+
+    else if (resposta == 'n') {
+        printf("\nVoltando para o menu...\n");
+    }
+}

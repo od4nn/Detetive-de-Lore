@@ -65,4 +65,5 @@ void menu();
 int listar_obras(LoreDB *db);
 int buscar_obras(LoreDB *db, char *nome_obra);
 int adicionar_teoria(LoreDB *db, int indice, Teoria nova_teoria);
+void detalhar_obra(LoreDB *db, int indice);
 #endif

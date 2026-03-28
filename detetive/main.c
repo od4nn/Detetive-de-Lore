@@ -49,6 +49,8 @@ int main()
                     printf("Erro: Crie uma obra primeiro!\n\n");
                     break;
                 }
+                printf("Caso queira saber as informacoes detalhadas dessa"
+                       " obra digite o 4 no menu e informe o nome da obra.")
                 break;
             }
 
@@ -70,7 +72,7 @@ int main()
                 if (indice == ERR_OBRA_PESQUISA_NAO_ENCONTRADA) {
                     printf("\nErro: Obra nao encontrada!\nCertifique se de ter "
                            "criado a obra ou se digitou o nome corretamente. Letras"
-                           "maisculas ou minusculas importam!\n");
+                           "maisculas, minusculas e espacos importam!\n");
                     break;
                 }
 
@@ -100,6 +102,30 @@ int main()
                     "Teoria adicionada!", "adicionar teoria");
 
                 break;
+            }
+
+            case 4: {
+                char NOME_OBRA_TEMP[TAMANHO_NOME_OBRA];
+                printf("Informe o nome da obra que deseja inspecionar: ");
+                fgets(NOME_OBRA_TEMP, TAMANHO_NOME_OBRA, stdin);
+                NOME_OBRA_TEMP[strcspn(NOME_OBRA_TEMP, "\n")] = '\0';
+
+                int indice = buscar_obras(&database, NOME_OBRA_TEMP); //busca obra
+
+                //verifica se foi atribuido o indice corretamente
+                if (indice == ERR_OBRA_PESQUISA_NAO_EXISTE) {
+                    printf("\nErro: Crie uma obra antes!\n");
+                    break;
+                }
+                if (indice == ERR_OBRA_PESQUISA_NAO_ENCONTRADA) {
+                    printf("\nErro: Obra nao encontrada!\nCertifique se de ter "
+                           "criado a obra ou se digitou o nome corretamente. Letras"
+                           "maisculas, minusculas e espacos importam!\n");
+                    break;
+                }
+
+                printf("Obra %s encontrada!", database.obras[indice].obra_nome);
+
             }
             case 0: {
                 printf("Encerrando o programa...\n");
