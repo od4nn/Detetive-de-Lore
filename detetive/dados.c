@@ -27,7 +27,6 @@ int adicionar_obra(LoreDB *db, Obra obra_usuario){
 
     int i = db->quant_obras;
 
-
     db->obras[i] = obra_usuario; //copiando dados do main para a struct
 
     db->obras[i].teorias = NULL; //zerando teorias
@@ -53,11 +52,54 @@ int listar_obras(LoreDB *db) {
 
         printf("\n--OBRA N.%d--", i+1);
         printf("\nNome: %s", db->obras[i].obra_nome);
-        printf("\nTipo: %s", db->obras[i].tipo);
+        /*printf("\nTipo: %s", db->obras[i].tipo);
         printf("\nStatus: %s", db->obras[i].status);
         printf("\nGenero: %s", db->obras[i].genero);
-        printf("\nTeorias feitas: %d", db->obras[i].quant_teorias);
+        printf("\nTeorias feitas: %d\n", db->obras[i].quant_teorias);*/
     }
+    return OK;
+}
+
+int buscar_obras(LoreDB *db, char *nome_obra) {
+
+    if (db->quant_obras == 0) {
+        return ERR_OBRA_PESQUISA_NAO_EXISTE;
+    }
+
+    for (int i = 0; i < db->quant_obras; i++) {
+        if(strcmp(nome_obra, db->obras[i].obra_nome) == 0) {
+            return i;
+        }
+    }
+    // se nao achou a obra ate aqui
+    return ERR_OBRA_PESQUISA_NAO_ENCONTRADA;
+}
+
+int adicionar_teoria(LoreDB *db, int indice, Teoria nova_teoria) {
+    Teoria *temp = NULL;
+
+    if (db->obras[indice].quant_teorias == db->obras[indice].capacidade_teorias) {
+
+        int nova_capacidade = (db->obras[indice].capacidade_teorias == 0) ? 2 :
+        (db->obras[indice].capacidade_teorias * 2);     /* se for zero (ainda nao existe
+        cria dois espaços se nao dobra o que ja existe) */
+
+        temp = realloc(db->obras[indice].teorias, sizeof(Teoria) * nova_capacidade);
+
+        if (temp == NULL) {
+            return ERR_FALTA_MEMORIA;
+        }
+
+        db->obras[indice].teorias = temp;
+        db->obras[indice].capacidade_teorias = nova_capacidade;
+    }
+
+    int i = db->obras[indice].quant_teorias;
+
+    db->obras[indice].teorias[i] = nova_teoria; //indice diz qual obra deve ser, i diz qual teoria é
+
+    db->obras[indice].quant_teorias++;
+
     return OK;
 }
 
