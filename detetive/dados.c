@@ -52,10 +52,10 @@ int listar_obras(LoreDB *db) {
 
         printf("\n--OBRA N.%d--", i+1);
         printf("\nNome: %s", db->obras[i].obra_nome);
-        printf("\nTipo: %s", db->obras[i].tipo);
+        /*printf("\nTipo: %s", db->obras[i].tipo);
         printf("\nStatus: %s", db->obras[i].status);
         printf("\nGenero: %s", db->obras[i].genero);
-        printf("\nTeorias feitas: %d", db->obras[i].quant_teorias);
+        printf("\nTeorias feitas: %d\n", db->obras[i].quant_teorias);*/
     }
     return OK;
 }

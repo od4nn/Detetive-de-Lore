@@ -68,8 +68,9 @@ int main()
                     break;
                 }
                 if (indice == ERR_OBRA_PESQUISA_NAO_ENCONTRADA) {
-                    printf("\nErro: Obra nao encontrada!\nCertifique se de ter"
-                           "criado a obra ou se digitou o nome corretamente.\n");
+                    printf("\nErro: Obra nao encontrada!\nCertifique se de ter "
+                           "criado a obra ou se digitou o nome corretamente. Letras"
+                           "maisculas ou minusculas importam!\n");
                     break;
                 }
 
@@ -95,6 +96,10 @@ int main()
                 fgets(NOVA_TEORIA.data, TAMANHO_DATA, stdin);
                 NOVA_TEORIA.data[strcspn(NOVA_TEORIA.data, "\n")] = '\0';
 
+                tratar_retorno(adicionar_teoria(&database, indice, NOVA_TEORIA),
+                    "Teoria adicionada!", "adicionar teoria");
+
+                break;
             }
             case 0: {
                 printf("Encerrando o programa...\n");
