@@ -145,3 +145,28 @@ void detalhar_obra(LoreDB *db, int indice) {
         printf("\nNenhuma teoria cadastrada nessa obra ainda.");
     }
 }
+
+int salvar_dados(LoreDB *db) {
+    FILE *arquivo = fopen("dados.txt", "w");
+
+    if (arquivo == NULL) {
+        return ERR_ABRIR_ARQUIVO;
+    }
+
+    fprintf(arquivo, "%d\n", db->quant_obras);
+
+    for (int i = 0; i < db->quant_obras; i++) { //passa pelas obras
+        fprintf(arquivo,"%s\n%s\n%s\n%s\n%d\n", db->obras[i].obra_nome,
+             db->obras[i].genero,db->obras[i].status, db->obras[i].tipo,
+             db->obras[i].quant_teorias);
+
+            for (int j = 0; j < db->obras[i].quant_teorias; j++) { //passa pelas teorias da obra
+                fprintf(arquivo, "%s\n%d\n%d\n%s\n%s\n", db->obras[i].teorias[j].data,
+                    db->obras[i].teorias[j].episodio, db->obras[i].teorias[j].temporada,
+                    db->obras[i].teorias[j].status_teoria, db->obras[i].teorias[j].teoria);
+            }
+    }
+
+    fclose(arquivo);
+    return OK;
+}
