@@ -170,3 +170,24 @@ int salvar_dados(LoreDB *db) {
     fclose(arquivo);
     return OK;
 }
+
+int carregar_dados(LoreDB *db) {
+    FILE *arquivo = fopen("dados.txt", "r");
+
+    char linha_temp[50];
+    Obra obra_temp;
+    Teoria teoria_temp;
+
+    if (arquivo == NULL) {
+        return OK;
+    }
+
+    fgets(linha_temp, 50, arquivo);
+
+    int total_obras = atoi(linha_temp);
+
+    for (int i = 0; i < total_obras; i++) {
+        fgets(obra_temp.obra_nome, TAMANHO_NOME_OBRA, arquivo);
+
+    }
+}
