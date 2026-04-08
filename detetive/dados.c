@@ -177,6 +177,7 @@ int carregar_dados(LoreDB *db) {
     char linha_temp[50];
     Obra obra_temp;
     Teoria teoria_temp;
+    char quant_teor[50];
 
     if (arquivo == NULL) {
         return OK;
@@ -188,6 +189,27 @@ int carregar_dados(LoreDB *db) {
 
     for (int i = 0; i < total_obras; i++) {
         fgets(obra_temp.obra_nome, TAMANHO_NOME_OBRA, arquivo);
+        obra_temp.obra_nome[strcspn(obra_temp.obra_nome, "\n")] = '\0';
+
+        fgets(obra_temp.genero, TAMANHO_GENERO, arquivo);
+        obra_temp.genero[strcspn(obra_temp.genero, "\n")] = '\0';
+
+        fgets(obra_temp.status, TAMANHO_STATUS, arquivo);
+        obra_temp.status[strcspn(obra_temp.status, "\n")] = '\0';
+
+        fgets(obra_temp.tipo, TAMANHO_TIPO, arquivo);
+        obra_temp.tipo[strcspn(obra_temp.tipo, "\n")] = '\0';
+
+        fgets(quant_teor, 50, arquivo);
+        quant_teor[strcspn(quant_teor, "\n")] = '\0';
+        int quant_teorias = atoi(quant_teor);
+
+        adicionar_obra(db, obra_temp); //pq isso nao precisa de & ??
+
+        for (int j = 0; j < quant_teorias; i++) {
+                //mesmo esquema das obras so que com teorias, lembrar de limpar
+        }
+        // no fim chame a teoria e deve ta quase pronto falta delete e free
 
     }
 }
