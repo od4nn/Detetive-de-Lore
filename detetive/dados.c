@@ -174,14 +174,14 @@ int salvar_dados(LoreDB *db) {
 int carregar_dados(LoreDB *db) {
     FILE *arquivo = fopen("dados.txt", "r");
 
+    if (arquivo == NULL) {
+        return OK;
+    }
+
     char linha_temp[50];
     Obra obra_temp;
     Teoria teoria_temp;
     char quant_teor[50];
-
-    if (arquivo == NULL) {
-        return OK;
-    }
 
     fgets(linha_temp, 50, arquivo);
 
@@ -204,12 +204,29 @@ int carregar_dados(LoreDB *db) {
         quant_teor[strcspn(quant_teor, "\n")] = '\0';
         int quant_teorias = atoi(quant_teor);
 
-        adicionar_obra(db, obra_temp); //pq isso nao precisa de & ??
+        adicionar_obra(db, obra_temp);
 
-        for (int j = 0; j < quant_teorias; i++) {
-                //mesmo esquema das obras so que com teorias, lembrar de limpar
+        for (int j = 0; j < quant_teorias; j++) {
+            fgets(teoria_temp.data, TAMANHO_DATA, arquivo);
+            teoria_temp.data[strcspn(teoria_temp.data, "\n")] = '\0';
+
+            fgets(linha_temp, 50, arquivo);
+            teoria_temp.episodio = atoi(linha_temp);
+
+            fgets(linha_temp, 50, arquivo);
+            teoria_temp.temporada = atoi(linha_temp);
+
+            fgets(teoria_temp.status_teoria, TAMANHO_STATUS, arquivo);
+            teoria_temp.status_teoria[strcspn(teoria_temp.status_teoria, "\n")] = '\0';
+
+            fgets(teoria_temp.teoria, TAMANHO_TEORIA, arquivo);
+            teoria_temp.teoria[strcspn(teoria_temp.teoria, "\n")] = '\0';
+
+            adicionar_teoria(db, i, teoria_temp);
         }
-        // no fim chame a teoria e deve ta quase pronto falta delete e free
-
     }
+
+    fclose(arquivo);
+
+    return OK;
 }
