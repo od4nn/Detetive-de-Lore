@@ -145,3 +145,88 @@ void detalhar_obra(LoreDB *db, int indice) {
         printf("\nNenhuma teoria cadastrada nessa obra ainda.");
     }
 }
+
+int salvar_dados(LoreDB *db) {
+    FILE *arquivo = fopen("dados.txt", "w");
+
+    if (arquivo == NULL) {
+        return ERR_ABRIR_ARQUIVO;
+    }
+
+    fprintf(arquivo, "%d\n", db->quant_obras);
+
+    for (int i = 0; i < db->quant_obras; i++) { //passa pelas obras
+        fprintf(arquivo,"%s\n%s\n%s\n%s\n%d\n", db->obras[i].obra_nome,
+             db->obras[i].genero,db->obras[i].status, db->obras[i].tipo,
+             db->obras[i].quant_teorias);
+
+            for (int j = 0; j < db->obras[i].quant_teorias; j++) { //passa pelas teorias da obra
+                fprintf(arquivo, "%s\n%d\n%d\n%s\n%s\n", db->obras[i].teorias[j].data,
+                    db->obras[i].teorias[j].episodio, db->obras[i].teorias[j].temporada,
+                    db->obras[i].teorias[j].status_teoria, db->obras[i].teorias[j].teoria);
+            }
+    }
+
+    fclose(arquivo);
+    return OK;
+}
+
+int carregar_dados(LoreDB *db) {
+    FILE *arquivo = fopen("dados.txt", "r");
+
+    if (arquivo == NULL) {
+        return OK;
+    }
+
+    char linha_temp[50];
+    Obra obra_temp;
+    Teoria teoria_temp;
+    char quant_teor[50];
+
+    fgets(linha_temp, 50, arquivo);
+
+    int total_obras = atoi(linha_temp);
+
+    for (int i = 0; i < total_obras; i++) {
+        fgets(obra_temp.obra_nome, TAMANHO_NOME_OBRA, arquivo);
+        obra_temp.obra_nome[strcspn(obra_temp.obra_nome, "\n")] = '\0';
+
+        fgets(obra_temp.genero, TAMANHO_GENERO, arquivo);
+        obra_temp.genero[strcspn(obra_temp.genero, "\n")] = '\0';
+
+        fgets(obra_temp.status, TAMANHO_STATUS, arquivo);
+        obra_temp.status[strcspn(obra_temp.status, "\n")] = '\0';
+
+        fgets(obra_temp.tipo, TAMANHO_TIPO, arquivo);
+        obra_temp.tipo[strcspn(obra_temp.tipo, "\n")] = '\0';
+
+        fgets(quant_teor, 50, arquivo);
+        quant_teor[strcspn(quant_teor, "\n")] = '\0';
+        int quant_teorias = atoi(quant_teor);
+
+        adicionar_obra(db, obra_temp);
+
+        for (int j = 0; j < quant_teorias; j++) {
+            fgets(teoria_temp.data, TAMANHO_DATA, arquivo);
+            teoria_temp.data[strcspn(teoria_temp.data, "\n")] = '\0';
+
+            fgets(linha_temp, 50, arquivo);
+            teoria_temp.episodio = atoi(linha_temp);
+
+            fgets(linha_temp, 50, arquivo);
+            teoria_temp.temporada = atoi(linha_temp);
+
+            fgets(teoria_temp.status_teoria, TAMANHO_STATUS, arquivo);
+            teoria_temp.status_teoria[strcspn(teoria_temp.status_teoria, "\n")] = '\0';
+
+            fgets(teoria_temp.teoria, TAMANHO_TEORIA, arquivo);
+            teoria_temp.teoria[strcspn(teoria_temp.teoria, "\n")] = '\0';
+
+            adicionar_teoria(db, i, teoria_temp);
+        }
+    }
+
+    fclose(arquivo);
+
+    return OK;
+}

@@ -54,6 +54,7 @@ typedef enum {
     ERR_FALTA_MEMORIA = 1, // Falha malloc/realloc
     ERR_LEITURA = 2, //Falha ao salvar dados
     ERR_OBRA_NAO_ENCONTRAD = 3,
+    ERR_ABRIR_ARQUIVO = 4,
 }CodigosErro;
 
 //funcoes
@@ -66,4 +67,6 @@ int listar_obras(LoreDB *db);
 int buscar_obras(LoreDB *db, char *nome_obra);
 int adicionar_teoria(LoreDB *db, int indice, Teoria nova_teoria);
 void detalhar_obra(LoreDB *db, int indice);
+int salvar_dados(LoreDB *db);
+int carregar_dados(LoreDB *db);
 #endif

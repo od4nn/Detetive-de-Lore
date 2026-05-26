@@ -7,6 +7,7 @@ int main()
 {
     LoreDB database; //declara banco de dados
     inicializar_db(&database); // inicializa (limpa lixo de memoria dentro dele)
+    carregar_dados(&database); //carrega dados do txt (banco de dados) para ram
 
     printf("=== BEM VINDO AO DETETIVE DE LORE ===\n\n");
     int opcao;
@@ -131,6 +132,7 @@ int main()
                 break;
             }
             case 0: {
+                salvar_dados(&database);
                 printf("Encerrando o programa...\n");
                 break;
             }
