@@ -230,3 +230,29 @@ int carregar_dados(LoreDB *db) {
 
     return OK;
 }
+
+int deletar_obra (LoreDB *db, int indice) {
+    if (db->obras[indice].teorias != NULL) {
+        free(db->obras[indice].teorias);
+    }
+
+    for (int i = indice; i < db->quant_obras - 1; i++) {
+        db->obras[i] = db->obras[i+1];
+    }
+    db->quant_obras--;
+
+    return OK;
+}
+
+void liberar_db (LoreDB *db) {
+    for (int i = 0; i < db->quant_obras; i++) {
+        if (db->obras[i].teorias != NULL) {
+            free(db->obras[i].teorias);
+        }
+    }
+    free(db->obras);
+    //limpando
+    db->obras = NULL;
+    db->quant_obras = 0;
+    db->capacidade_obras = 0;
+}
