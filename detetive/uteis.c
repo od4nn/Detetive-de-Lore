@@ -48,6 +48,8 @@ void menu() {
         printf("2. Listar Obras\n");
         printf("3. Adicionar Teoria\n");
         printf("4. Detalhar Obra\n");
+        printf("5. Deletar Obra\n");
+        printf("6. Atualizar Status da Teoria\n");
         printf("0. Encerrar programa\n");
         printf("\nEscolha uma opcao: ");
 }

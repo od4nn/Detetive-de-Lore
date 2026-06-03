@@ -158,6 +158,37 @@ int main()
                 }
                 break;
             }
+            case 6: {
+                char NOME_OBRA_TEMP[TAMANHO_NOME_OBRA];
+                printf("\nInforme o nome da obra que possui a teoria: ");
+                fgets(NOME_OBRA_TEMP, TAMANHO_NOME_OBRA, stdin);
+                NOME_OBRA_TEMP[strcspn(NOME_OBRA_TEMP, "\n")] = '\0';
+
+                int indice = buscar_obras(&database, NOME_OBRA_TEMP); //busca obra
+
+                //verifica se foi atribuido o indice corretamente
+                if (indice == ERR_OBRA_PESQUISA_NAO_EXISTE) {
+                    printf("\nErro: Crie uma obra antes!\n");
+                    break;
+                }
+                if (indice == ERR_OBRA_PESQUISA_NAO_ENCONTRADA) {
+                    printf("\nErro: Obra nao encontrada!\nCertifique se de ter "
+                           "criado a obra ou se digitou o nome corretamente. Letras"
+                           "maisculas, minusculas e espacos importam!\n");
+                    break;
+                }
+
+                int verif_indice = atualizar_status_teoria(&database, indice);
+
+                if (verif_indice ==  ERR_TEORIA_NAO_EXISTE) {
+                    printf("\nErro: nao existe nenhuma teoria nessa obra ainda!");
+                    break;
+                }
+                if (verif_indice == OK) {
+                    printf("\nTeoria atualizada com sucesso!");
+                }
+                break;
+            }
             case 0: {
                 salvar_dados(&database);
                 liberar_db(&database);
