@@ -69,4 +69,6 @@ int adicionar_teoria(LoreDB *db, int indice, Teoria nova_teoria);
 void detalhar_obra(LoreDB *db, int indice);
 int salvar_dados(LoreDB *db);
 int carregar_dados(LoreDB *db);
+int deletar_obra (LoreDB *db, int indice);
+void liberar_db (LoreDB *db);
 #endif
