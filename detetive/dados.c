@@ -256,3 +256,33 @@ void liberar_db (LoreDB *db) {
     db->quant_obras = 0;
     db->capacidade_obras = 0;
 }
+
+int atualizar_status_teoria (LoreDB *db, int indice) {
+    if (db->obras[indice].quant_teorias == 0) {
+        return ERR_TEORIA_NAO_EXISTE;
+    }
+    printf("\n=== TEORIAS DA OBRA ===\n");
+
+    for (int i = 0; i < db->obras[indice].quant_teorias; i++) {
+        printf("\n[%d] Status atual: %s - Teoria: %.20s...",
+            i+1, db->obras[indice].teorias[i].status_teoria,
+            db->obras[indice].teorias[i].teoria);
+    }
+
+    int num_teoria;
+
+    do {
+        printf("\n\nInforme o numero da teoria que deseja atualizar o status: ");
+        scanf("%d", &num_teoria);
+        limpar_buffer();
+    }while (num_teoria < 1 || num_teoria > db->obras[indice].quant_teorias); //garante que o usuario digite um numero invalido
+
+    char novo_status[TAMANHO_STATUS];
+    printf("Informe o novo status dessa teoria: ");
+    fgets(novo_status, TAMANHO_STATUS, stdin);
+    novo_status[strcspn(novo_status, "\n")] = '\0';
+
+    strcpy(db->obras[indice].teorias[num_teoria-1].status_teoria, novo_status);
+
+    return OK;
+}
